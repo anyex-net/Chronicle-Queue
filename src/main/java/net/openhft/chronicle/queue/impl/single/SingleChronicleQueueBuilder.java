@@ -23,6 +23,7 @@ import net.openhft.chronicle.bytes.BytesStore;
 import net.openhft.chronicle.bytes.MappedBytes;
 import net.openhft.chronicle.core.Jvm;
 import net.openhft.chronicle.core.Maths;
+import net.openhft.chronicle.core.Mocker;
 import net.openhft.chronicle.core.OS;
 import net.openhft.chronicle.core.io.Closeable;
 import net.openhft.chronicle.core.io.IORuntimeException;
@@ -530,7 +531,9 @@ public class SingleChronicleQueueBuilder extends SelfDescribingMarshallable impl
     @Deprecated
     @NotNull
     QueueLock queueLock() {
-        return isQueueReplicationAvailable() && !readOnly() ? new TSQueueLock(metaStore, pauserSupplier(), timeoutMS() * 3 / 2) : new NoopQueueLock();
+        return isQueueReplicationAvailable() && !readOnly()
+                ? new TSQueueLock(metaStore, pauserSupplier(), timeoutMS() * 3 / 2)
+                : Mocker.ignored(QueueLock.class);
     }
 
     @NotNull

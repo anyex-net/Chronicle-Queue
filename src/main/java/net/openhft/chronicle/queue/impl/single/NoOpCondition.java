@@ -1,5 +1,6 @@
 package net.openhft.chronicle.queue.impl.single;
 
+import net.openhft.chronicle.core.util.IgnoresEverything;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
@@ -9,11 +10,12 @@ import java.util.concurrent.locks.Condition;
 /**
  * A condition that is always true
  */
-public final class NoOpCondition implements Condition {
+public final class NoOpCondition implements Condition, IgnoresEverything {
 
     public static final NoOpCondition INSTANCE = new NoOpCondition();
 
-    private NoOpCondition() {}
+    private NoOpCondition() {
+    }
 
     @Override
     public void await() throws InterruptedException {

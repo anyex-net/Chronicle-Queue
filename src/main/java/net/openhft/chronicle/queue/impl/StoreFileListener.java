@@ -17,13 +17,14 @@
 
 package net.openhft.chronicle.queue.impl;
 
+import net.openhft.chronicle.core.Mocker;
+
 import java.io.File;
 
 @FunctionalInterface
 public interface StoreFileListener {
 
-    StoreFileListener NO_OP = (int cycle, File file) -> {
-    };
+    StoreFileListener NO_OP = Mocker.ignored(StoreFileListener.class);
 
     default void onAcquired(int cycle, File file) {
 

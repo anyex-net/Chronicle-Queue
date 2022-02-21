@@ -17,7 +17,10 @@
  */
 package net.openhft.chronicle.queue.impl.single;
 
-public class NoopQueueLock implements QueueLock {
+import net.openhft.chronicle.core.util.IgnoresEverything;
+
+@Deprecated(/* to be removed in x.24 */)
+public class NoopQueueLock implements QueueLock, IgnoresEverything {
 
     @Override
     public void waitForLock() {
