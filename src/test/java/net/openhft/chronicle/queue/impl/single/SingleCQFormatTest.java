@@ -172,7 +172,6 @@ public class SingleCQFormatTest extends ChronicleQueueTestBase {
         try (MappedBytes bytes = MappedBytes.mappedBytes(file, QueueUtil.testBlockSize() * 2L);
              SCQIndexing marshallable = new SCQIndexing(WireType.BINARY, 32, 4)) {
             wire = new BinaryWire(bytes);
-            wire.usePadding(true);
             try (DocumentContext dc = wire.writingDocument(true)) {
                 dc.wire().writeEventName("header").typePrefix(SingleChronicleQueueStore.class).marshallable(w -> {
                     w.write("wireType").object(WireType.BINARY);
@@ -224,7 +223,6 @@ public class SingleCQFormatTest extends ChronicleQueueTestBase {
         final MappedBytes bytes = MappedBytes.mappedBytes(new File(dir, "19700101-02" + SingleChronicleQueue.SUFFIX), QueueUtil.testBlockSize() * 2L);
 
         final Wire wire = new BinaryWire(bytes);
-        wire.usePadding(true);
         try (final SingleChronicleQueueStore store = new SingleChronicleQueueStore(RollCycles.HOURLY, WireType.BINARY, bytes, 4 << 10, 4)) {
             try (DocumentContext dc = wire.writingDocument(true)) {
                 dc.wire().write("header").typedMarshallable(store);
@@ -267,7 +265,6 @@ public class SingleCQFormatTest extends ChronicleQueueTestBase {
 
         try (MappedBytes bytes = MappedBytes.mappedBytes(new File(dir, "19700101T4" + SingleChronicleQueue.SUFFIX), QueueUtil.testBlockSize())) {
             final Wire wire = new BinaryWire(bytes);
-            wire.usePadding(true);
             try (DocumentContext dc = wire.writingDocument(true)) {
                 dc.wire().writeEventName("header")
                         .typePrefix(SingleChronicleQueueStore.class).marshallable(

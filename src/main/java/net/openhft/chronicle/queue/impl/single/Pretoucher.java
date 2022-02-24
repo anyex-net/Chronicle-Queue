@@ -105,7 +105,6 @@ public final class Pretoucher extends AbstractCloseable {
                 if (!earlyAcquireNextCycle && currentCycleWireStore != null && canWrite)
                     try {
                         final Wire wire = queue.wireType().apply(currentCycleMappedBytes);
-                        wire.usePadding(currentCycleWireStore.dataVersion() > 0);
                         currentCycleWireStore.writeEOF(wire, queue.timeoutMS);
                     } catch (Exception ex) {
                         Jvm.warn().on(getClass(), "unable to write the EOF file=" + currentCycleMappedBytes.mappedFile().file(), ex);

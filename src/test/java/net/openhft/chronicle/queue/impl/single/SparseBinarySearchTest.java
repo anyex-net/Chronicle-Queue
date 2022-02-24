@@ -139,7 +139,6 @@ public class SparseBinarySearchTest extends ChronicleQueueTestBase {
         myData.key = key;
         myData.value = Integer.toString(key);
         Wire wire = WireType.BINARY.apply(Bytes.elasticByteBuffer());
-        wire.usePadding(true);
 
         try (final DocumentContext dc = wire.writingDocument()) {
             dc.wire().getValueOut().typedMarshallable(myData);

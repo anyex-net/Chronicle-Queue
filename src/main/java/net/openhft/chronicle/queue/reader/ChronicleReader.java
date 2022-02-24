@@ -264,12 +264,12 @@ public class ChronicleReader implements Reader {
     }
 
     public ChronicleReader asMethodReader(@Nullable String methodReaderInterface) {
-        if (methodReaderInterface == null)
-            entryHandlerFactory = () -> QueueEntryHandler.dummy(wireType);
-        else try {
-            this.methodReaderInterface = Class.forName(methodReaderInterface);
-        } catch (ClassNotFoundException e) {
-            throw Jvm.rethrow(e);
+        if (methodReaderInterface != null) {
+            try {
+                this.methodReaderInterface = Class.forName(methodReaderInterface);
+            } catch (ClassNotFoundException e) {
+                throw Jvm.rethrow(e);
+            }
         }
         return this;
     }

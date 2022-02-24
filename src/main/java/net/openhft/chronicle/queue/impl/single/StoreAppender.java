@@ -298,7 +298,6 @@ class StoreAppender extends AbstractCloseable
 
     private Wire createWire(@NotNull final WireType wireType) {
         final Wire w = wireType.apply(store.bytes());
-        w.usePadding(store.dataVersion() > 0);
         return w;
     }
 

@@ -181,7 +181,6 @@ public class SingleChronicleQueueStore extends AbstractCloseable implements Wire
         try (MappedBytes bytes = MappedBytes.mappedBytes(mappedFile)) {
             bytes.readLimit(bytes.realCapacity());
             final Wire w = WireType.BINARY.apply(bytes);
-            w.usePadding(dataVersion > 0);
             return Wires.fromSizePrefixedBlobs(w, abbrev);
         }
     }

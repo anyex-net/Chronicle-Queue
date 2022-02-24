@@ -79,7 +79,7 @@ public class InternalDumpMain {
         try (MappedBytes bytes = MappedBytes.mappedBytes(file, 4 << 20, OS.pageSize(), !OS.isWindows())) {
             bytes.readLimit(bytes.realCapacity());
             StringBuilder sb = new StringBuilder();
-            WireDumper dumper = WireDumper.of(bytes, !UNALIGNED);
+            WireDumper dumper = WireDumper.of(bytes);
             while (bytes.readRemaining() >= 4) {
                 sb.setLength(0);
                 boolean last = dumper.dumpOne(sb, buffer);

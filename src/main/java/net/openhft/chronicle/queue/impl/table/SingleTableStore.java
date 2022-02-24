@@ -92,7 +92,6 @@ public class SingleTableStore<T extends Metadata> extends AbstractCloseable impl
             }
 
             mappedWire = wireType.apply(mappedBytes);
-            mappedWire.usePadding(true);
 
             disableThreadSafetyCheck(true);
         } finally {
@@ -112,7 +111,6 @@ public class SingleTableStore<T extends Metadata> extends AbstractCloseable impl
         this.mappedBytes = mappedBytes;
         this.mappedFile = mappedBytes.mappedFile();
         mappedWire = wireType.apply(mappedBytes);
-        mappedWire.usePadding(true);
 
         disableThreadSafetyCheck(true);
     }
@@ -181,7 +179,7 @@ public class SingleTableStore<T extends Metadata> extends AbstractCloseable impl
         final MappedBytes bytes = MappedBytes.mappedBytes(mappedFile);
         try {
             bytes.readLimit(bytes.realCapacity());
-            return Wires.fromSizePrefixedBlobs(bytes, true, abbrev);
+            return Wires.fromSizePrefixedBlobs(bytes, abbrev);
         } finally {
             bytes.releaseLast();
         }

@@ -112,7 +112,6 @@ public class SingleChronicleQueueBuilderTest extends ChronicleQueueTestBase {
 
         builder.build().close();
         final Wire wire = Wires.acquireBinaryWire();
-        wire.usePadding(true);
         wire.write().typedMarshallable(builder);
 
         System.err.println(wire.bytes().toHexString());
